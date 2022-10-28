@@ -21,10 +21,10 @@
     <nav class="navbar bg-light">
       <div class="container-fluid">
         <a href="http://localhost:8080/" class="navbar-brand">PT. Istidata Indopasific Solution Center</a>
-        <!-- <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <form class="d-flex" role="search" th:object="${searchForm}" method="post" th:action="@{/search}">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:field="*{keyword}">
           <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
+        </form>
       </div>
     </nav>
     <br>
@@ -34,26 +34,16 @@
     </br>
     <div class="card" style="width: 30rem"; >
       <div class="card-body">
-        <form>
-          <div class="form-row">
-            <div class="form-group" >
-              <label for="exampleInputEmail1">No.Registrasi</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                placeholder="">
-            </div>
-            </br>
-            <div class="form-group " >
-              <label for="exampleInputPassword1">Nama</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="">
-            </div>
-            </br>
-            <button type="submit" class="btn btn-success btn-sm" button>
-              Search</button>
-            <a class="btn btn-primary btn-sm" th:href="@{/add}" role="button">Add New</a>
-          </div>
+        <form  role="search" th:object="${searchForm}" method="post" th:action="@{/search}">
+          <input class="form-control me-2" type="search" placeholder="Cari Berdasarkan Nama" aria-label="Search" th:field="*{keyword}">
+          <br>
+          <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
+          <a class="btn btn-outline-primary btn-sm" th:href="@{/add}" role="button">Add New</a>
         </form>
       </div>
     </div>
+
+    
 
     </br>
     </br>
@@ -84,7 +74,7 @@
 
             <a onclick="return confirm('Anda Yakin Hapus Data ini..?')"  th:href="@{'/delete/'+${prod.id}}" class="btn btn-danger btn-sm delBtn">Delete</a>
 
-            <a class="btn btn-success btn-sm" th:href="@{/detail}" role="button">Detail</a>
+            <a class="btn btn-success btn-sm" th:href="@{'/detail/'+${prod.id}}" role="button">Detail</a>
           </td>
         </tr>
       </tbody>

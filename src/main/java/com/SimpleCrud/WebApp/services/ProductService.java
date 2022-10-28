@@ -1,5 +1,6 @@
 package com.SimpleCrud.WebApp.services;
 
+import java.util.List;
 import java.util.Optional;
 
 // import java.util.Optional;
@@ -38,6 +39,9 @@ public class ProductService {
 
     }
     
+    public List<Product> FindByName(String keyword) {
+        return Prepo.findByNamaContains(keyword);
+    }
     
 }
 
