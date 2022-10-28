@@ -33,10 +33,11 @@ public class ProductService {
        return Prepo.findById(id);
     }
 
-    public void updateProduct (Product product){
+    public void updateProduct(Product product) {
         Prepo.save(product);
-        
+
     }
+    
     
 }
 

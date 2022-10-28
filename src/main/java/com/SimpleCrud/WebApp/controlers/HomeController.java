@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.SimpleCrud.WebApp.models.Product;
-import com.SimpleCrud.WebApp.models.Product.Warna;
 import com.SimpleCrud.WebApp.services.ProductService;
 
 @Controller
@@ -29,7 +28,6 @@ public class HomeController {
     @GetMapping(value = "/add")
     public String add(Model model) {
         model.addAttribute("Productse", new Product());
-        model.addAttribute("pilihwarna", Warna.values());
         return "add";
     }
 

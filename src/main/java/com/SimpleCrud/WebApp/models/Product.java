@@ -26,17 +26,9 @@ public class Product {
     @Column (length = 4)
     private Integer tahun;
     @Column(length = 10)
-    private Warna warna;
+    private String warna;
     @Column(length = 10)
     private String Bbakar;
-
-
-
-    public enum Warna {
-        A,
-        B
-    }
-
 
     public Product() {
     }
@@ -89,11 +81,11 @@ public class Product {
         this.tahun = tahun;
     }
 
-    public Warna getWarna() {
+    public String getWarna() {
         return this.warna;
     }
 
-    public void setWarna(Warna warna) {
+    public void setWarna(String warna) {
         this.warna = warna;
     }
 
@@ -104,6 +96,6 @@ public class Product {
     public void setBbakar(String Bbakar) {
         this.Bbakar = Bbakar;
     }
-   
 
+  
 }
