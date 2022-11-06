@@ -1,5 +1,9 @@
 package com.SimpleCrud.WebApp.controlers;
 
+import java.util.List;
+
+// import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.SimpleCrud.WebApp.dto.searchdata;
 import com.SimpleCrud.WebApp.models.Product;
@@ -21,7 +26,8 @@ public class HomeController {
     public ProductService pService;
 
     @GetMapping
-    public String welcome(searchdata srcdata, Model model) {
+    public String welcome(RedirectAttributes flash, searchdata srcdata, Model model) {
+        flash.addFlashAttribute("FlashMsg", "Oke");
         String message = "Aplikasi Data Kendaraan";
         model.addAttribute("msg", message);
         model.addAttribute("searchForm", new searchdata());
@@ -31,14 +37,15 @@ public class HomeController {
 
     @GetMapping(value = "/add")
     public String add(Model model) {
+        model.addAttribute("pilihwarna", List.of("Black-Matte", "Red-Matte","White-Pearl"));
         model.addAttribute("Productse", new Product());
         return "add";
     }
 
     @PostMapping(value = "/save")
-    public String save(Product product, Model model) {
-        pService.addProduct(product);
-        return "redirect:/";
+    public String save( Product product, Model model) {
+            pService.addProduct(product);
+            return "redirect:/";
 
     }
 
@@ -73,6 +80,14 @@ public class HomeController {
         model.addAttribute("msg", message);
         model.addAttribute("products", pService.findAll());
         return "detail";
+    }
+
+    @GetMapping(value = "/coba")
+    public String coba(Model model) {
+        String message = "Aplikasi Data Kendaraan";
+        model.addAttribute("msg", message);
+        model.addAttribute("products", pService.findAll());
+        return "coba";
     }
 
 

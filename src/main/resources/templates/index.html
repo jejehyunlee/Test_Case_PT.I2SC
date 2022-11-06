@@ -8,10 +8,12 @@
   <title>Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-  <script type="text/javascript" th:src="@{'/js'/sweetalert2.all.min.js}" src="../js/sweetalert2.all.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link th:href="@{/webjars/sweetalert2/11.1.2/dist/sweetalert2.min.css}" rel="stylesheet">
+  <script th:src="@{/webjars/sweetalert2/11.1.2/dist/sweetalert2.min.js}"></script>
+  <script th:src="@{/webjars/sweetalert2/11.1.2/dist/sweetalert2.all.min.js}"></script>
+  <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+  <!-- <script th:src="@{js/sweetalert2.all.min.js}"> src="#" </script> -->
 
- 
 
 </head>
 
@@ -20,30 +22,35 @@
   <div class="container">
     <nav class="navbar bg-light">
       <div class="container-fluid">
-        <a href="http://localhost:8080/" class="navbar-brand">PT. Istidata Indopasific Solution Center</a>
-        <form class="d-flex" role="search" th:object="${searchForm}" method="post" th:action="@{/search}">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" th:field="*{keyword}">
+        <a href="http://localhost:9999/" class="navbar-brand">PT. Istidata Indopasific Solution Center</a>
+        <form class="d-flex" role="search" method="" action="">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>
     </nav>
     <br>
-
+    <h2 th:text="${FlashMsg}"></h2>
     <h1 th:text="${msg}"> </h1>
 
     </br>
-    <div class="card" style="width: 30rem"; >
-      <div class="card-body">
-        <form  role="search" th:object="${searchForm}" method="post" th:action="@{/search}">
-          <input class="form-control me-2" type="search" placeholder="Cari Berdasarkan Nama" aria-label="Search" th:field="*{keyword}">
-          <br>
-          <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
-          <a class="btn btn-outline-primary btn-sm" th:href="@{/add}" role="button">Add New</a>
-        </form>
+    <div class="" data-flashdata="">
+      <php if ($this->session</php>)>
+
+      </php>
+      <div class="card" style="width: 30rem" ;>
+        <div class="card-body">
+          <form role="search" th:object="${searchForm}" method="post" th:action="@{/search}">
+            <input class="form-control me-2" type="search" placeholder="Cari Berdasarkan Nama" aria-label="Search"
+              th:field="*{keyword}">
+            <br>
+            <button class="btn btn-outline-success btn-sm" type="submit">Search</button>
+            <a class="btn btn-outline-primary btn-sm" th:href="@{/add}" role="button">Add New</a>
+          </form>
+        </div>
       </div>
     </div>
 
-    
 
     </br>
     </br>
@@ -57,7 +64,7 @@
           <th>Tahun</th>
           <th>Warna</th>
           <th>Bahan Bakar</th>
-          <th>Action</th>
+          <th width="180px">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -69,11 +76,9 @@
           <td th:text="${prod.tahun}"> </td>
           <td th:text="${prod.warna}"> </td>
           <td th:text="${prod.Bbakar}"> </td>
-          <td>
+          <td type="center">
             <a class="btn btn-primary btn-sm" th:href="@{'/edit/'+${prod.id}}" role="button">Edit</a>
-
-            <a onclick="return confirm('Anda Yakin Hapus Data ini..?')"  th:href="@{'/delete/'+${prod.id}}" class="btn btn-danger btn-sm delBtn">Delete</a>
-
+            <a id="Btn10" th:href="@{'/delete/'+${prod.id}}" class="btn btn-danger btn-sm ">Delete</a>
             <a class="btn btn-success btn-sm" th:href="@{'/detail/'+${prod.id}}" role="button">Detail</a>
           </td>
         </tr>
@@ -81,11 +86,40 @@
     </table>
   </div>
 
-<!-- modal hapus -->
+  <!-- modal hapus -->
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
+
     </script>
+
+  <script>
+
+    $(document).on('click', '#Btn10', function (e) {
+      e.preventDefault();
+      var href = $(this).attr('href');
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+        window.location = href;
+      })
+    });
+
+
+  </script>
 
 </body>
 
