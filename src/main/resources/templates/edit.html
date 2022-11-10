@@ -47,9 +47,14 @@
               <label>Tahun</label>
               <input type="number" class="form-control" id="tahun" th:field="*{tahun}" />
             </div>
-            <div class="form-group ">
-              <label>Warna</label>
-              <input type="text" class="form-control" id="warna" th:field="*{warna}" />
+            <div>
+              <label><b>Warna</b> </label>
+              <select class=" form-select
+              " aria-label="multiple select example" th:field="*{warna}">
+                <!-- <option selected>=Pilih Warna=</option> -->
+                <option th:each="warna : ${pilihwarna}" th:value="${warna}" th:text="${warna}">
+                </option>
+              </select>
             </div>
             <div class="form-group ">
               <label>Bahan Bakar</label>
@@ -57,7 +62,7 @@
             </div>
             <br>
             <button onclick="alert('Data Berhasil Diubah')" type="submit" class="btn btn-primary btn-sm">Save</button>
-            <a class="btn btn-danger btn-sm" href="http://localhost:8080/" role="button">Cancel</a>
+            <a class="btn btn-danger btn-sm" href="http://localhost:9999/" role="button">Cancel</a>
             <!-- </div>
       </div> -->
     </form>

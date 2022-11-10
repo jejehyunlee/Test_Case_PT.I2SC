@@ -16,6 +16,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.SimpleCrud.WebApp.dto.searchdata;
 import com.SimpleCrud.WebApp.models.Product;
 import com.SimpleCrud.WebApp.services.ProductService;
+// import com.fasterxml.jackson.databind.introspect.TypeResolutionContext.Empty;
+
 
 
 @Controller
@@ -26,8 +28,7 @@ public class HomeController {
     public ProductService pService;
 
     @GetMapping
-    public String welcome(RedirectAttributes flash, searchdata srcdata, Model model) {
-        flash.addFlashAttribute("FlashMsg", "Oke");
+    public String welcome(searchdata srcdata, Model model) {
         String message = "Aplikasi Data Kendaraan";
         model.addAttribute("msg", message);
         model.addAttribute("searchForm", new searchdata());
@@ -37,16 +38,24 @@ public class HomeController {
 
     @GetMapping(value = "/add")
     public String add(Model model) {
-        model.addAttribute("pilihwarna", List.of("Black-Matte", "Red-Matte","White-Pearl"));
+        model.addAttribute("pilihwarna", List.of("Black-Matte", "Red-Matte", "White-Pearl"));
         model.addAttribute("Productse", new Product());
         return "add";
+
     }
 
     @PostMapping(value = "/save")
-    public String save( Product product, Model model) {
-            pService.addProduct(product);
-            return "redirect:/";
+    public String save(RedirectAttributes attributes, Product product, Model model) {
+        Product dbproduct = pService.findByNoreg(product.getNoreg());
 
+        if (dbproduct == null) {
+            pService.addProduct(product);
+            attributes.addFlashAttribute("alert", "Data berhasil disimpan!");
+            return "redirect:/";
+        } else {
+            attributes.addFlashAttribute("already", "Uuuppsss.....! No. Registrasi Sudah terdaftar");
+            return "redirect:/add";
+        }
     }
 
     @GetMapping(value = "/delete/{Id}")
@@ -57,6 +66,7 @@ public class HomeController {
 
     @GetMapping(value = "/edit/{Id}")
     public String edit(@PathVariable("Id") long Id, Model model) {
+        model.addAttribute("pilihwarna", List.of("Black-Matte", "Red-Matte", "White-Pearl"));
         model.addAttribute("products", pService.findById(Id));
         return "edit";
     }
@@ -82,21 +92,20 @@ public class HomeController {
         return "detail";
     }
 
-    @GetMapping(value = "/coba")
-    public String coba(Model model) {
-        String message = "Aplikasi Data Kendaraan";
-        model.addAttribute("msg", message);
-        model.addAttribute("products", pService.findAll());
-        return "coba";
-    }
-
-
     @PostMapping("/search")
-    public String search(searchdata srcdata, Model model) {
-        String message = "Aplikasi Data Kendaraan";
-        model.addAttribute("msg", message);
-        model.addAttribute("searchForm", srcdata);
-        model.addAttribute("products", pService.FindByName(srcdata.getKeyword()));
-        return "index";
+    public String search(RedirectAttributes attributes, searchdata srcdata, Model model, String keyword,Product product) {
+        Product dbproduct = pService.findByNama(keyword);
+        if (dbproduct != null) {
+            String message = "Aplikasi Data Kendaraan";
+            model.addAttribute("msg", message);
+            model.addAttribute("searchForm", srcdata);
+            model.addAttribute("products", pService.FindByName(srcdata.getKeyword()));
+            return "index";
+        } else  {
+            attributes.addFlashAttribute("notfound", "Uuuppsss.....! Nama tidak ditemukan");
+            return "redirect:/";
+
+        }
     }
+
 }

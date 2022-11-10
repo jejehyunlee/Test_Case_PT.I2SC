@@ -27,79 +27,71 @@
     </nav>
     <br>
 
-    <h2 th:text="${flashMsg}"></h2>
-
     <form th:object="${Productse}" method="post" th:action="@{/save}" autocomplete="off" class="row ">
       <br>
       <div class="card" style="width: 50rem;">
         <div class="card-body">
           <h3 class="">Form Tambah Data</h3>
           <br>
+          <div data-bs-dismiss="alert" class="alert alert-danger alert-dismissible fade show col-md-6" role="alert"
+            th:text="${already}" th:if="${already}">
+          </div>
+          
           <div class="form-group">
             <label><b> No.Registrasi</b></label>
             <input type="text" class="form-control" name="noreg" th:field="*{noreg}" value="" required autofocus
               oninvalid="this.setCustomValidity('No. Registrasi Tidak Boleh Kosong')"
               oninput="this.setCustomValidity('')" />
           </div>
-          <br>
+          
           <div class="form-group">
             <label><b>Nama</b> </label>
             <input type="text" class="form-control" id="nama" th:field="*{nama}" required
-              oninvalid="this.setCustomValidity('Form Tidak Boleh Kosong')" oninput="this.setCustomValidity('')" />
+              oninvalid="this.setCustomValidity('Nama Tidak Boleh Kosong')" oninput="this.setCustomValidity('')" />
           </div>
-          <br>
+          
           <div class="form-group mb-3">
             <label> <b> Alamat</b></label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{alamat}"></textarea>
           </div>
-            <br>
-            <div class="form-group">
-              <label><b> Merk</b></label>
-              <input type="text" class="form-control" id="merk" th:field="*{merk}" />
-            </div>
-            <br>
-            <div class="form-group">
-              <label><b> Tahun</b></label>
-              <input type="text" class="form-control" id="tahun" th:field="*{tahun}" required minlength="1"
-                maxlength="4" />
-            </div>
-            <br>
-            <div>
-              <label><b>Warna</b> </label>
-              <select class=" form-select
+          <br>
+          <div class="form-group">
+            <label><b> Merk</b></label>
+            <input type="text" class="form-control" id="merk" th:field="*{merk}" />
+          </div>
+          
+          <div class="form-group">
+            <label><b> Tahun</b></label>
+            <input type="text" class="form-control" id="tahun" th:field="*{tahun}" required minlength="1"
+              maxlength="4" />
+          </div>
+          
+          <div>
+            <label><b>Warna</b> </label>
+            <select class=" form-select
               " aria-label="multiple select example" th:field="*{warna}">
               <!-- <option selected>=Pilih Warna=</option> -->
-                <option th:each="warna : ${pilihwarna}" th:value="${warna}" th:text="${warna}">
-                </option>
-              </select>
-            </div>
-            <br>
-            <div class="form-group ">
-              <label> <b> Bahan Bakar</b></label>
-              <input type="text" class="form-control" id="Bbakar" th:field="*{Bbakar}" />
-            </div>
-            <br>
-            <button id="BtnSave" type="submit" class="btn btn-primary btn-sm">Save</button>
-            <a class="btn btn-danger btn-sm" href="http://localhost:9999/" role="button">Cancel</a>
-
+              <option th:each="warna : ${pilihwarna}" th:value="${warna}" th:text="${warna}">
+              </option>
+            </select>
           </div>
+          
+          <div class="form-group ">
+            <label> <b> Bahan Bakar</b></label>
+            <input type="text" class="form-control" id="Bbakar" th:field="*{Bbakar}" />
+          </div>
+          
+          <button onclick="confirm('Anda yakin simpan data ini ?')" type="submit"
+            class="btn btn-primary btn-sm">Save</button>
+          <a class="btn btn-danger btn-sm" href="http://localhost:9999/" role="button">Cancel</a>
+
         </div>
+      </div>
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
       crossorigin="anonymous"></script>
-
-    <script>
-      $(document).on('click', '#BtnSave', function () {
-        Swal.fire({
-          title: 'OK',
-          text: "OK",
-          icon: 'success',
-        });
-      });
-
-    </script>
 
 
   </div>

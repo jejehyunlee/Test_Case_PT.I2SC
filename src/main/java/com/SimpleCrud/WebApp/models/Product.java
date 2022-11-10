@@ -9,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+
 
 
 @Entity
@@ -21,9 +20,7 @@ public class Product implements Serializable {
     private long id;
     @Column (length = 10, unique = true)
     private String noreg;
-    @NotNull(message = "Title cannot be empty")
-    @Size(min = 3, max = 50, message = "Title name can be minimum 3 and maximum 50 characters long")
-    @Column (length = 10)
+    @Column (length = 20)
     private String nama;
     @Column(length = 100)
     private String alamat;
@@ -31,9 +28,9 @@ public class Product implements Serializable {
     private String merk;
     @Column (length = 4)
     private Integer tahun;
-    @Column(length = 10)
+    @Column(length = 20)
     private String warna;
-    @Column(length = 10)
+    @Column(length = 20)
     private String Bbakar;
 
     public Product() {

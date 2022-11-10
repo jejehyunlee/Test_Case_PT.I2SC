@@ -81,18 +81,6 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
-		<dependency>
-            <groupId>net.sourceforge</groupId>
-            <artifactId>php-java-bridge</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-		
-        <dependency>
-            <groupId>net.sourceforge</groupId>
-            <artifactId>php-servlet</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-
  </dependencies>
 
 

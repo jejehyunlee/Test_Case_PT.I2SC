@@ -40,8 +40,19 @@ public class ProductService {
     }
     
     public List<Product> FindByName(String keyword) {
+        
         return Prepo.findByNamaContains(keyword);
+    
     }
+
+    public Product findByNoreg(String noreg) {
+        return Prepo.findByNoreg(noreg);
+    }
+
+    public Product findByNama(String nama) {
+            return Prepo.findByNama(nama);
+        }
+    
     
 }
 
