@@ -65,7 +65,7 @@ public class HomeController {
     }
 
     @GetMapping(value = "/edit/{Id}")
-    public String edit(@PathVariable("Id") long Id, Model model) {
+    public String edit(@PathVariable("Id")long Id, Model model) {
         model.addAttribute("pilihwarna", List.of("Black-Matte", "Red-Matte", "White-Pearl"));
         model.addAttribute("products", pService.findById(Id));
         return "edit";
@@ -78,8 +78,9 @@ public class HomeController {
     }
 
     @PostMapping(value = "/update")
-    public String update(Product product, Model model) {
+    public String update(RedirectAttributes attributes, Product product, Model model) {
         pService.updateProduct(product);
+        attributes.addFlashAttribute("alertedit", "Data berhasil di ubah!");
         return "redirect:/";
 
     }
