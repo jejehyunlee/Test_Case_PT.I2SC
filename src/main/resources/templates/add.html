@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/img/AHM.png">
   <title>Tambah Data</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -25,68 +26,70 @@
               </form> -->
       </div>
     </nav>
-    <br>
+    <form th:object="${products}" method="post" th:action="@{/save}" autocomplete="off" class="row ">
 
-    <form th:object="${Productse}" method="post" th:action="@{/save}" autocomplete="off" class="row ">
-      <br>
-      <div class="card" style="width: 50rem;">
+      <div class="card" style="width: 30rem;">
         <div class="card-body">
+
           <h3 class="">Form Tambah Data</h3>
           <br>
           <div id="alert" data-bs-dismiss="alert" class="alert alert-danger alert-dismissible fade show col-md-6" role="alert"
             th:text="${already}" th:if="${already}">
           </div>
-          
+          <br>
           <div class="form-group">
-            <label><b> No.Registrasi</b></label>
-            <input type="text" class="form-control" name="noreg" th:field="*{noreg}" value="" required autofocus
-              oninvalid="this.setCustomValidity('No. Registrasi Tidak Boleh Kosong')"
+            <label><b> No. Induk Karyawan</b></label>
+            <input type="text" class="form-control" name="nik" th:field="*{nik}" value="" required autofocus
+              oninvalid="this.setCustomValidity('NIK Tidak Boleh Kosong')"
               oninput="this.setCustomValidity('')" />
           </div>
-          
+          <br>
           <div class="form-group">
             <label><b>Nama</b> </label>
             <input type="text" class="form-control" id="nama" th:field="*{nama}" required
               oninvalid="this.setCustomValidity('Nama Tidak Boleh Kosong')" oninput="this.setCustomValidity('')" />
           </div>
-          
+          <br>
+          <div class="form-group">
+            <label><b> Jenis Kelamin</b>
+              <br>
+              <input type="radio" value="Laki-Laki" th:field="*{jenisKelamin}" />
+              Laki-Laki
+            </label>
+            <label>
+              <input type="radio" value="Perempuan" th:field="*{jenisKelamin}" />
+              Perempuan
+            </label>
+            <br>
+          </div>
+          <br>
+          <div class="form-group">
+            <label><b> Tanggal</b></label>
+            <input type="date" class="form-control" id="tanggal" th:field="*{tanggal}" />
+          </div>
+          <br>
           <div class="form-group mb-3">
             <label> <b> Alamat</b></label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{alamat}"></textarea>
           </div>
           <br>
-          <div class="form-group">
-            <label><b> Merk</b></label>
-            <input type="text" class="form-control" id="merk" th:field="*{merk}" />
-          </div>
-          
-          <div class="form-group">
-            <label><b> Tahun</b></label>
-            <input type="text" class="form-control" id="tahun" th:field="*{tahun}" required minlength="1"
-              maxlength="4" />
-          </div>
-          
           <div>
-            <label><b>Warna</b> </label>
+            <label><b>Negara</b> </label>
             <select class=" form-select
-              " aria-label="multiple select example" th:field="*{warna}">
+              " aria-label="multiple select example" th:field="*{negara}">
               <!-- <option selected>=Pilih Warna=</option> -->
-              <option th:each="warna : ${pilihwarna}" th:value="${warna}" th:text="${warna}">
+              <option th:each="negara : ${pilihnegara}" th:value="${negara}" th:text="${negara}">
               </option>
             </select>
           </div>
-          
-          <div class="form-group ">
-            <label> <b> Bahan Bakar</b></label>
-            <input type="text" class="form-control" id="Bbakar" th:field="*{Bbakar}" />
-          </div>
-          
+          <br>
           <button onclick="confirm('Anda yakin simpan data ini ?')" type="submit"
-            class="btn btn-primary btn-sm">Save</button>
-          <a class="btn btn-danger btn-sm" href="http://localhost:9999/" role="button">Cancel</a>
+            class="btn btn-primary btn-lg">Save</button>
+          <a class="btn btn-danger btn-lg" href="http://localhost:9999/" role="button">Cancel</a>
 
         </div>
       </div>
+
     </form>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"

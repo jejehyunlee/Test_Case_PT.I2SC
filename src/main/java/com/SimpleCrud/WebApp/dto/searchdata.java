@@ -20,4 +20,6 @@ public class searchdata {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
+
+
 }
