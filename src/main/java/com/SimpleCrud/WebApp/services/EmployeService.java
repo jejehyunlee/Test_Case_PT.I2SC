@@ -1,5 +1,7 @@
 package com.SimpleCrud.WebApp.services;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +25,7 @@ public class EmployeService {
     }
 
     public void addEmployee(Employe employe){
+        getAge(employe);
         employeRepo.save(employe);
     }
 
@@ -35,21 +38,26 @@ public class EmployeService {
     }
 
     public void updateEmployee(Employe employe) {
+        getAge(employe);
         employeRepo.save(employe);
 
     }
     
-    public List<Employe> FindByName(String keyword) {
-
-        return employeRepo.findByNamaContains(keyword);
-
-    }
-    public List<Employe> FindByNik(String keyword) {
-        if(keyword != null){
-            return employeRepo.findByNikContains(keyword);
+    public List<Employe> findByNameYaBro(String keyword) {
+        if (keyword != null){
+            return employeRepo.findByNamaContaining(keyword);
         }
         return employeRepo.findAll();
+    }
 
+
+    public List<Employe> findByNikYaBro(String keyword1, String keyword2) {
+        if (keyword1 != null && keyword2 !=null){
+
+            return employeRepo.findByNikOrNamaContaining(keyword1, keyword2);
+
+        }
+        return employeRepo.findAll();
     }
 
     public Employe findByNik(String nik) {
@@ -57,14 +65,16 @@ public class EmployeService {
     }
 
 
-    public static void main(String[] args) {
 
-        Employe employe = new Employe();
+    public void getAge(Employe employe) {
 
-        System.out.println(employe.getTanggal());
+        if (employe.getTanggal() != null) {
+            LocalDate localDate = LocalDate.now();
+            long years = ChronoUnit.YEARS.between(employe.getTanggal(), localDate);
+            employe.setAge((int) years);
+        }
 
     }
-
 
 }
 

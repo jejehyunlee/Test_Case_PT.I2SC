@@ -41,13 +41,14 @@
             <label><b> No. Induk Karyawan</b></label>
             <input type="text" class="form-control" name="nik" th:field="*{nik}" value="" required autofocus
               oninvalid="this.setCustomValidity('NIK Tidak Boleh Kosong')"
-              oninput="this.setCustomValidity('')" />
+              oninput="this.setCustomValidity('')" minlength="1" maxlength="20" />
           </div>
           <br>
           <div class="form-group">
             <label><b>Nama</b> </label>
             <input type="text" class="form-control" id="nama" th:field="*{nama}" required
-              oninvalid="this.setCustomValidity('Nama Tidak Boleh Kosong')" oninput="this.setCustomValidity('')" />
+              oninvalid="this.setCustomValidity('Nama Tidak Boleh Kosong')"
+                   oninput="this.setCustomValidity('')" minlength="1" maxlength="50" />
           </div>
           <br>
           <div class="form-group">
@@ -70,7 +71,7 @@
           <br>
           <div class="form-group mb-3">
             <label> <b> Alamat</b></label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{alamat}"></textarea>
+            <textarea maxlength="100" class="form-control" id="exampleFormControlTextarea1" rows="3" th:field="*{alamat}"></textarea>
           </div>
           <br>
           <div>

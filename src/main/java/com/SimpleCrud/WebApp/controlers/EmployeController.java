@@ -1,6 +1,5 @@
 package com.SimpleCrud.WebApp.controlers;
 
-import java.time.LocalDate;
 import java.util.List;
 
 // import javax.validation.Valid;
@@ -28,19 +27,9 @@ public class EmployeController {
     @GetMapping
     public String welcome(Model model){
         String message = "Aplikasi Data Karyawan";
-//        Employe employe = new Employe();
-//
-//        LocalDate today = LocalDate.now();
-//
-//        LocalDate birthdate = employe.getTanggal() ;
-//
-//        int age = today.compareTo(birthdate);
-
         model.addAttribute("msg", message);
         model.addAttribute("searchForm", new searchdata());
         model.addAttribute("products", employeService.findAll());
-//        model.addAttribute("age", age);
-////        System.out.println(age);
         return "index" ;
     }
 
@@ -93,23 +82,29 @@ public class EmployeController {
 
     }
 
-//    @GetMapping(value = "/detail")
-//    public String detail(Model model) {
-//        String message = "Aplikasi Data Kendaraan";
-//        model.addAttribute("msg", message);
-//        model.addAttribute("Products", pService.findAll());
-//        return "detail";
+//    @PostMapping("/searchNama")
+//    public String searchNama(RedirectAttributes attributes, searchdata srcdata, Model model, String keyword) {
+//        List<Employe> dbproduct = employeService.findByNameYaBro(keyword);
+//        if (dbproduct != null) {
+//            String message = "Aplikasi Data Kendaraan";
+//            model.addAttribute("msg", message);
+//            model.addAttribute("searchForm", srcdata);
+//            model.addAttribute("products", employeService.findByNameYaBro(srcdata.getKeyword()));
+//            return "index";
+//        } else {
+//            attributes.addFlashAttribute("notfound", "Data tidak ada");
+//            return "redirect:/";
+//        }
 //    }
 
     @PostMapping("/search")
-    public String search(RedirectAttributes attributes, searchdata srcdata, Model model, String keyword,
-            Employe employe) {
-        Employe dbproduct = employeService.findByNik(keyword);
+    public String searchNik(RedirectAttributes attributes, searchdata srcdata, Model model, String keyword, String keyword2) {
+        List<Employe> dbproduct = employeService.findByNikYaBro(keyword, keyword2);
         if (dbproduct != null) {
             String message = "Aplikasi Data Kendaraan";
             model.addAttribute("msg", message);
             model.addAttribute("searchForm", srcdata);
-            model.addAttribute("products", employeService.FindByNik(srcdata.getKeyword()));
+            model.addAttribute("products", employeService.findByNikYaBro(srcdata.getKeyword(),srcdata.getKeywordNik()));
             return "index";
         } else {
             attributes.addFlashAttribute("notfound", "Data tidak ada");

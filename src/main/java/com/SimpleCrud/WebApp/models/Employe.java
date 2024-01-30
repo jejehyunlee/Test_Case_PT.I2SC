@@ -34,7 +34,7 @@ public class Employe {
     private String nik;
 
     @NotEmpty
-    @Column (length = 20)
+    @Column (length = 50)
     private String nama;
 
     @Column(length = 20)
@@ -49,5 +49,8 @@ public class Employe {
 
     @Column(length = 20)
     private String negara;
+
+    @Column(length = 20)
+    private Integer age;
 
 }

@@ -1,25 +1,16 @@
 package com.SimpleCrud.WebApp.dto;
 
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class searchdata {
     private String keyword;
 
-
-    public searchdata() {
-    }
-
-
-    public searchdata(String keyword) {
-        this.keyword = keyword;
-    }
-
-
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
+    private String keywordNik;
 
 }
